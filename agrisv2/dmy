@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title><?php echo($clsConst->SYS_NAME_AGRI); ?></title>
+    <link href="<? echo(PUBLIC_URL); ?>/bootstrap-3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="<? echo(PUBLIC_URL); ?>/js/jquery-1.10.2.min.js" type="text/javascript"></script> 
+    <script src="<? echo(PUBLIC_URL); ?>/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <!-- -->    
+    <script type="text/javascript" src="<? echo(PUBLIC_URL); ?>/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="<? echo(PUBLIC_URL); ?>/js/jquery.jqplot.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="<? echo(PUBLIC_URL); ?>/css/jquery.jqplot.min.css" />
+<script>
+jQuery( function() {
+    data_1  = [<?php echo($sDat ); ?>];
+    data_2  = [<?php echo($sDat2); ?>];
+    data_3  = [<?php echo($sDat3); ?>];
+    data_4  = [<?php echo($sDat4); ?>];
+    jQuery . jqplot(
+        'jqPlot-sample',
+        [
+           data_1
+           , data_2
+           , data_3
+           , data_4
+        ],
+        {
+            series: [
+                { label: 'Valve-1' },
+                { label: 'Valve-2' },
+                { label: 'Valve-3' },
+                { label: 'Valve-4' }
+            ],
+            legend: {
+                show: true,
+                placement: 'outside',
+                location: 'ne',
+            },
+            seriesDefaults: {
+                markerOptions: {
+                    size: 6
+                }
+            }            
+        }
+    );    
+} );
+</script>	   
+  </head>
+  <body>
+<nav class="navbar  navbar-default" role="navigation" style="margin-bottom: 0px;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+            <a class="navbar-brand" href="/"><?php echo($clsConst->SYS_NAME_AGRI); ?>
+            </a>
+        </li>
+        <li>
+            <a href="/" style="margin-left:100px;">| Home |
+            </a>
+        </li>
+
+      </ul>
+     
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+ 	<div class="row" style="margin-top:20px;">
+ 	<div class="col-sm-12">
+		<h2 ><font style="color: green;">[Report] MC-ID: <?php echo($sMc_id); ?></font>
+		 | <font style="color: green;"><?php echo($datMc[0]["mc_name"]);  ?> </font></h2>
+ 	</div>
+ 	
+ 	</div>
+	<center>
+	<div id="jqPlot-sample" style="height: 400px; width: 600px;"></div>
+	</center>
+	<div class="row">
+		<div class="col-sm-6">
+       <h3 style="color: green;">Sensor</h3>
+	<table style="width:100%;" class="table table-striped table-hover">
+	  <tbody>
+	   <tr>
+		<th>mc-Id
+		</th>
+		<th>Valve<br />No
+		</th>
+		<th>Sensor<br />Value
+		</th>
+		<th>Date
+		</th>
+	   </tr>
+	   <?php
+		foreach ($datSen as &$value) {
+			echo("<tr>");
+			echo(" <td>"  . $value["mc_id"]);
+			echo(" </td>");
+			echo(" <td>"  . $value["vnum"]);
+			echo(" </td>");
+			echo(" <td>"  . $value["snum"]);
+			echo(" </td>");
+			echo(" <td>"  . $value["str_cre"]);
+			echo(" </td>");
+			echo("</tr>");
+		}
+	   ?>
+	  </tbody>
+	</table>
+		</div>
+		<div class="col-sm-6"><h3 style="color: green;">Valve</h3	>
+		  <table style="width:100%;" class="table table-striped table-hover">
+		   <tbody>
+		   <tr>
+			<th>mc-Id
+			</th>
+			<th>Valve<br />no
+			</th>
+			<th>State<br />(Open)
+			</th>
+			<th>Date
+			</th>
+		   </tr>
+	   <?php
+		foreach ($datValve as &$value) {
+			echo("<tr>");
+			echo(" <td>"  . $value["mc_id"]);
+			echo(" </td>");
+			echo(" <td>"  . $value["vnum"]);
+			echo(" </td>");
+			$sOpen ="-";
+			if($value["k_flg"]==1){
+				$sOpen ="<font color='blue'>Open<font>";
+			}
+			echo(" <td>"  . $sOpen );
+			echo(" </td>");
+			echo(" <td>"  . $value["str_cre"]);
+			echo(" </td>");
+			echo("</tr>");
+		}
+	   ?>		   
+		   </tbody>
+		  </table>
+		</div>
+		
+	</div>
+	
+</div>  
+</body>
+</html>
