@@ -718,7 +718,7 @@ function com_saveValve($db, $getDat, $datMc ){
 	$k_flg_2 =Is_validValve($getDat["snum_2"], $datMc["moi_num"] );
 	$k_flg_3 =Is_validValve($getDat["snum_3"], $datMc["moi_num"] );
 	$k_flg_4 =Is_validValve($getDat["snum_4"], $datMc["moi_num"] );
-var_dump($k_flg_1);
+// var_dump($k_flg_1);
 	if($datMc["vnum_1"] == OK_CODE){
 		$sql="";
 		$sql= $sql . "INSERT INTO t_vitems (";
